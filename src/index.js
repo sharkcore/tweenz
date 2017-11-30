@@ -18,8 +18,7 @@ export default function tweenz(...tweens) {
         res.send = getPatchedResponseFn(res.send.bind(res), context);
 
         // Construct a Promise to be fulfilled when request has completed
-        const requestDetails = new Promise((resolve, reject) => {
-            req.on('error', reject);
+        const requestDetails = new Promise(resolve => {
             res.on('finish', () => {
                 resolve(context);
             });
