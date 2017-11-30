@@ -84,7 +84,7 @@ An object of the following type:
 }
 ```
 
-#### res
+#### req
 
 [Express request object](http://expressjs.com/en/api.html#req)
 
