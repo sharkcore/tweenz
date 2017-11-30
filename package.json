@@ -1,7 +1,7 @@
 {
     "name": "tweenz",
     "version": "0.0.1-alpha.1",
-    "main": "index.js",
+    "main": "lib/index.js",
     "author": "Mark Larah <mark@larah.me>",
     "license": "MIT",
     "scripts": {
