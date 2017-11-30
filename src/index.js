@@ -1,15 +1,18 @@
+// @flow
+import type { $Request, $Response, Middleware, NextFunction } from 'express';
+
 export const getPatchedResponseFn = (cb, context) => (...args) => {
     // Save body
     // eslint-disable-next-line prefer-destructuring, no-param-reassign
-    context.responseBody = args[0];
+    context.responseBody = context.responseBody || args[0];
     // Call the old response function
     cb(...args);
 };
 
-export default function tweenz(...tweens) {
+export default function tweenz(...tweens): Middleware {
     const tweenBodies = tweens.map(t => t());
 
-    return (req, res, next) => {
+    return (req: $Request, res: $Response, next: NextFunction) => {
         // Save some stateful request context
         const context = {};
 
