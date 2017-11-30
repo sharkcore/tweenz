@@ -1,8 +1,6 @@
 # tweenz
 
-A small library for writing Express middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
-
-Exposes additional request details, such as response body
+A small library for writing Express middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens), exposing additional request details.
 
 ## Getting started
 
