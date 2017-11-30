@@ -2,7 +2,7 @@ import express from 'express';
 import request from 'supertest';
 import tweenz from '../src/index';
 
-describe('middleware should work with res.json', () => {
+describe('middleware', () => {
     let app;
     let beforeFn;
     let afterFn;
@@ -23,7 +23,7 @@ describe('middleware should work with res.json', () => {
         app.use(tweenz(dummyTween));
     });
 
-    it('middleware should work with res.json', done => {
+    it('should work with res.json', done => {
         app.get('/foo', (req, res) => {
             res.json({ foo: 'bar' });
         });
@@ -37,7 +37,7 @@ describe('middleware should work with res.json', () => {
             });
     });
 
-    it('middleware should work with res.json', done => {
+    it('should work with res.end', done => {
         app.get('/foo', (req, res) => {
             res.send('foo');
         });
