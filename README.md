@@ -71,7 +71,7 @@ tweenz(tween [, tween ...])
 ```
 
 ### Tween Callback
-The body of a tween is a callback that gets executed with the following parameters:
+A tween should return a callback, which will get executed with the following parameters
 
 #### requestDetails
 
