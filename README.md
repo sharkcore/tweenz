@@ -10,7 +10,7 @@ yarn add tweenz
 
 ## How-to
 
-A tween in *`tweenz` looks like this:
+A tween in `tweenz` looks like this:
 
 ```js
 export default () => {
@@ -68,20 +68,23 @@ app.use(tweenz(timeLogger));
 tweenz(...[tween])
 ```
 
-### requestDetails
+### Tween Callback
+The body of a tween is a callback that gets executed with the following parameters:
+
+#### requestDetails
 
 An object of the following type:
 
 ```js
 {
-    responseBody: string | json
+    responseBody: string | Object
 }
 ```
 
-### res
+#### res
 
 [Express request object](http://expressjs.com/en/api.html#req)
 
-### res
+#### res
 
 [Express response object](http://expressjs.com/en/api.html#res)
