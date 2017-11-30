@@ -8,8 +8,6 @@ A small library for writing Express middleware, inspired by [Pyramid tweens](htt
 yarn add tweenz
 ```
 
-## How-to
-
 A tween in `tweenz` looks like this:
 
 ```js
