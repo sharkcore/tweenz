@@ -1,6 +1,6 @@
 # tweenz
 
-A small library for writing Express middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
+A small library for writing [Express](https://expressjs.com/) middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
 
 ### Why?
 This library does the following:
