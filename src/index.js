@@ -22,9 +22,21 @@ export default function tweenz(...tweens): Middleware {
 
         // Construct a Promise to be fulfilled when request has completed
         const requestDetails = new Promise(resolve => {
-            res.on('finish', () => {
+            function finish() {
                 resolve(context);
-            });
+                // eslint-disable-next-line no-use-before-define
+                removeListeners();
+            }
+
+            function removeListeners() {
+                res.removeListener('finish', finish);
+                res.removeListener('error', removeListeners);
+                res.removeListener('close', removeListeners);
+            }
+
+            res.once('finish', finish);
+            res.once('error', removeListeners);
+            res.once('close', removeListeners);
         });
 
         // Call each tween body

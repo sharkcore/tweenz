@@ -1,7 +1,7 @@
 any: build
 
 .PHONY: test
-test:
+test: node_modules
 	yarn run lint
 	yarn test
 
