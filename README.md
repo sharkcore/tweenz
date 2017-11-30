@@ -3,7 +3,7 @@
 A small library for writing Express middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
 
 ### Why?
-This solves the follow 2 problems:
+This library does the following:
 - Exposes the response body to the middleware (as part of `requestDetails`)
 - Provides a first class API to allow middleware to execute code after the request has completed
 
