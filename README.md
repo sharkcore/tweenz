@@ -7,7 +7,7 @@ A small library for writing [Express](https://expressjs.com/) middleware, inspir
 ### Why?
 This library does the following:
 - Exposes the response body to the middleware (as part of `requestDetails`)
-- Provides a first class API to allow middleware to execute code after the request has completed
+- Provides a first class API to allow middleware to safely execute code after the request has finished
 
 ## Getting started
 
