@@ -1,6 +1,6 @@
 # tweenz
 
-A small library for writing Express middleware, inspired by [https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens](Pyramid tweens).
+A small library for writing Express middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
 
 ## Getting started
 
@@ -76,6 +76,7 @@ An object of the following type:
 {
     responseBody: string | json
 }
+```
 
 ### res
 
