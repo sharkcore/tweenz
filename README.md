@@ -1,6 +1,6 @@
 # tweenz
 
-[![npm (scoped)](https://img.shields.io/npm/v/tweenz.svg)](https://yarn.pm/@sharkcore/eslint-config) [![Build Status](https://travis-ci.org/sharkcore/tweenz.svg?branch=master)](https://travis-ci.org/sharkcore/eslint-config) [![Greenkeeper badge](https://badges.greenkeeper.io/sharkcore/tweenz.svg)](https://greenkeeper.io/)
+[![npm (scoped)](https://img.shields.io/npm/v/tweenz.svg)](https://yarn.pm/tweenz) [![Build Status](https://travis-ci.org/sharkcore/tweenz.svg?branch=master)](https://travis-ci.org/sharkcore/tweenz) [![Greenkeeper badge](https://badges.greenkeeper.io/sharkcore/tweenz.svg)](https://greenkeeper.io/)
 
 A small library for writing [Express](https://expressjs.com/) middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
 
