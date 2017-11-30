@@ -65,7 +65,7 @@ app.use(tweenz(timeLogger));
 
 ### Registering tweens
 ```
-tweenz(...[tween])
+tweenz(tween [, tween ...])
 ```
 
 ### Tween Callback
