@@ -5,7 +5,8 @@ type Context = {
     responseBody?: string | Object,
 };
 
-export type Tween = () => (Promise<Context>, $Request, $Response) => void;
+export type Tween = (Promise<Context>, $Request, $Response) => void;
+export type TweenFactory = () => Tween;
 
 export const getPatchedResponseFn = (
     cb: $Response.json | $Response.send,
@@ -18,18 +19,20 @@ export const getPatchedResponseFn = (
     cb(...args);
 };
 
-export default function tweenz(...tweens: Array<Tween>): Middleware {
-    const tweenBodies = tweens.map(t => t());
+export default function tweenz(
+    ...tweenFactories: Array<TweenFactory>
+): Middleware {
+    const tweens = tweenFactories.map(t => t());
 
     return (req: $Request, res: $Response, next: NextFunction) => {
         // Save some stateful request context
         const context: Context = {};
 
-        // Monkey patch express methods
+        // Monkey patch express methods to intercept response body
         res.json = getPatchedResponseFn(res.json.bind(res), context);
         res.send = getPatchedResponseFn(res.send.bind(res), context);
 
-        // Construct a Promise to be fulfilled when request has completed
+        // Construct a Promise to be fulfilled when request has finished
         const requestDetails = new Promise(resolve => {
             function finish() {
                 resolve(context);
@@ -48,9 +51,9 @@ export default function tweenz(...tweens: Array<Tween>): Middleware {
             res.once('close', removeListeners);
         });
 
-        // Call each tween body
-        tweenBodies.forEach(tweenBody => {
-            tweenBody(requestDetails, req, res);
+        // Call each tween
+        tweens.forEach(tween => {
+            tween(requestDetails, req, res);
         });
 
         next();
