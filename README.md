@@ -82,7 +82,7 @@ An object of the following type:
 
 ```js
 {
-    responseBody: string | Object
+    responseBody: string
 }
 ```
 
