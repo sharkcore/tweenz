@@ -32,7 +32,7 @@ describe('middleware', () => {
             .get('/foo')
             .end(() => {
                 expect(beforeFn).toHaveBeenCalled();
-                expect(afterFn).toHaveBeenCalledWith({ foo: 'bar' });
+                expect(JSON.parse(afterFn.mock.calls[0][0])).toMatchObject({ foo: 'bar' });
                 done();
             });
     });

@@ -1,16 +1,20 @@
 // @flow
 import type { $Request, $Response, Middleware, NextFunction } from 'express';
 
-type Context = {
-    responseBody?: string | Object,
+export type RequestDetails = {
+    responseBody: string,
 };
 
-export type Tween = (Promise<Context>, $Request, $Response) => void;
+export type Tween = (
+    Promise<RequestDetails>,
+    $Request,
+    $Response,
+) => Promise<void>;
 export type TweenFactory = () => Tween;
 
 export const getPatchedResponseFn = (
     cb: $Response.json | $Response.send,
-    context: Context,
+    context: Object,
 ) => (...args: any) => {
     // Save body
     // eslint-disable-next-line prefer-destructuring, no-param-reassign
@@ -26,16 +30,17 @@ export default function tweenz(
 
     return (req: $Request, res: $Response, next: NextFunction) => {
         // Save some stateful request context
-        const context: Context = {};
+        const context = {};
 
         // Monkey patch express methods to intercept response body
-        res.json = getPatchedResponseFn(res.json.bind(res), context);
         res.send = getPatchedResponseFn(res.send.bind(res), context);
 
         // Construct a Promise to be fulfilled when request has finished
         const requestDetails = new Promise(resolve => {
             function finish() {
-                resolve(context);
+                resolve({
+                    responseBody: context.responseBody,
+                });
                 // eslint-disable-next-line no-use-before-define
                 removeListeners();
             }
