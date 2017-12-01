@@ -7,7 +7,10 @@ type Context = {
 
 export type Tween = () => (Promise<Context>, $Request, $Response) => void;
 
-export const getPatchedResponseFn = (cb: $Response.json | $Response.send, context: Context) => (...args: any) => {
+export const getPatchedResponseFn = (
+    cb: $Response.json | $Response.send,
+    context: Context,
+) => (...args: any) => {
     // Save body
     // eslint-disable-next-line prefer-destructuring, no-param-reassign
     context.responseBody = context.responseBody || args[0];

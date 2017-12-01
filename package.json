@@ -1,30 +1,30 @@
 {
-    "name": "tweenz",
-    "version": "1.0.2",
-    "main": "lib/index.js",
-    "author": "Mark Larah <mark@larah.me>",
-    "license": "MIT",
-    "scripts": {
-        "precommit": "yarn run lint",
-        "prepublishOnly": "make build",
-        "test": "jest --coverage",
-        "lint": "eslint --fix src",
-        "flow": "flow check"
-    },
-    "devDependencies": {
-        "@sharkcore/eslint-config": "^1.0.2",
-        "babel-cli": "^6.26.0",
-        "babel-core": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
-        "babel-preset-flow": "^6.23.0",
-        "eslint": "^4.12.0",
-        "flow-bin": "^0.59.0",
-        "husky": "^0.14.3",
-        "jest": "^21.2.1",
-        "supertest": "^3.0.0"
-    },
-    "dependencies": {
-        "express": "^4.16.2"
-    },
-    "files": ["lib"]
+  "name": "tweenz",
+  "version": "1.0.3",
+  "main": "lib/index.js",
+  "author": "Mark Larah <mark@larah.me>",
+  "license": "MIT",
+  "scripts": {
+    "precommit": "yarn run lint",
+    "prepublishOnly": "make build",
+    "test": "jest --coverage",
+    "lint": "eslint --fix src",
+    "flow": "flow check"
+  },
+  "devDependencies": {
+    "@sharkcore/eslint-config": "^1.0.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.12.0",
+    "flow-bin": "^0.59.0",
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "files": ["lib"]
 }
