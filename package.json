@@ -8,7 +8,8 @@
         "precommit": "yarn run lint",
         "prepublishOnly": "make build",
         "test": "jest --coverage",
-        "lint": "eslint --fix src"
+        "lint": "eslint --fix src",
+        "flow": "flow check"
     },
     "devDependencies": {
         "@sharkcore/eslint-config": "^1.0.2",

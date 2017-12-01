@@ -1,7 +1,13 @@
 // @flow
 import type { $Request, $Response, Middleware, NextFunction } from 'express';
 
-export const getPatchedResponseFn = (cb, context) => (...args) => {
+type Context = {
+    responseBody?: string | Object,
+};
+
+export type Tween = () => (Promise<Context>, $Request, $Response) => void;
+
+export const getPatchedResponseFn = (cb: $Response.json | $Response.send, context: Context) => (...args: any) => {
     // Save body
     // eslint-disable-next-line prefer-destructuring, no-param-reassign
     context.responseBody = context.responseBody || args[0];
@@ -9,12 +15,12 @@ export const getPatchedResponseFn = (cb, context) => (...args) => {
     cb(...args);
 };
 
-export default function tweenz(...tweens): Middleware {
+export default function tweenz(...tweens: Array<Tween>): Middleware {
     const tweenBodies = tweens.map(t => t());
 
     return (req: $Request, res: $Response, next: NextFunction) => {
         // Save some stateful request context
-        const context = {};
+        const context: Context = {};
 
         // Monkey patch express methods
         res.json = getPatchedResponseFn(res.json.bind(res), context);

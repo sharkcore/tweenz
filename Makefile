@@ -2,6 +2,7 @@ any: build
 
 .PHONY: test
 test: node_modules
+	yarn run flow
 	yarn run lint
 	yarn test
 
