@@ -14,14 +14,18 @@ export type TweenFactory = () => Tween;
 
 export const getPatchedSendFn = (
     context: Object,
-): $PropertyType<$Response, 'send'> =>
-    function send(...args: any) {
+    res: $Response,
+): $PropertyType<$Response, 'send'> => {
+    const oldSend = res.send.bind(res);
+
+    return function send(...args: any) {
         // eslint-disable-next-line prefer-destructuring, no-param-reassign
         context.responseBody = args[0];
-        this.send(...args);
+        oldSend(...args);
         /* istanbul ignore next */
         return this;
-    };
+    }.bind(res);
+};
 
 export default function tweenz(
     ...tweenFactories: Array<TweenFactory>
@@ -34,7 +38,7 @@ export default function tweenz(
 
         // Monkey patch express methods to intercept response body
         // $FlowFixMe: https://github.com/facebook/flow/issues/3076
-        res.send = getPatchedSendFn(context).bind(res);
+        res.send = getPatchedSendFn(context, res);
 
         // Construct a Promise to be fulfilled when request has finished
         const requestDetails = new Promise(resolve => {
