@@ -1,6 +1,6 @@
 {
   "name": "tweenz",
-  "version": "1.0.3",
+  "version": "2.0.2",
   "main": "lib/index.js",
   "author": "Mark Larah <mark@larah.me>",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "precommit": "yarn run lint",
     "prepublishOnly": "make build",
     "test": "jest --coverage",
-    "lint": "eslint --fix src",
+    "lint": "eslint src",
     "flow": "flow check"
   },
   "devDependencies": {
@@ -18,13 +18,17 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.12.0",
-    "flow-bin": "^0.60.0",
+    "express": "^4.16.2",
+    "flow-bin": "^0.60.1",
+    "flow-copy-source": "^1.2.1",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "supertest": "^3.0.0"
   },
-  "dependencies": {
-    "express": "^4.16.2"
+  "peerDependencies": {
+    "express": "^4.x.x"
   },
-  "files": ["lib"]
+  "files": [
+    "lib"
+  ]
 }
