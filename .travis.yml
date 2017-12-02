@@ -8,10 +8,10 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-  - yarn
+  - make node_modules
 
 script:
-  - yarn test
+  - make test
 
 deploy:
   provider: npm
