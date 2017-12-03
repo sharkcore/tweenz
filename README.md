@@ -1,13 +1,18 @@
 # tweenz
 
-[![npm (scoped)](https://img.shields.io/npm/v/tweenz.svg)](https://yarn.pm/tweenz) [![Build Status](https://travis-ci.org/sharkcore/tweenz.svg?branch=master)](https://travis-ci.org/sharkcore/tweenz) [![Greenkeeper badge](https://badges.greenkeeper.io/sharkcore/tweenz.svg)](https://greenkeeper.io/)
+[![npm (scoped)](https://img.shields.io/npm/v/tweenz.svg)](https://yarn.pm/tweenz)
+[![Build Status](https://travis-ci.org/sharkcore/tweenz.svg?branch=master)](https://travis-ci.org/sharkcore/tweenz)
+[![Greenkeeper badge](https://badges.greenkeeper.io/sharkcore/tweenz.svg)](https://greenkeeper.io/)
 
-A small library for writing [Express](https://expressjs.com/) middleware, inspired by [Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
+A small library for writing [Express](https://expressjs.com/) middleware, inspired by
+[Pyramid tweens](https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#registering-tweens).
 
 ### Why?
+
 This library does the following:
-- Exposes the response body to the middleware (as part of `requestDetails`)
-- Provides a first class API to allow middleware to safely execute code after the request has finished
+
+* Exposes the response body to the middleware (as part of `requestDetails`)
+* Provides a first class API to allow middleware to safely execute code after the request has finished
 
 ## Getting started
 
@@ -38,6 +43,7 @@ export default () => {
 Here's a tween to calculate the time taken for a request to complete:
 
 #### time-logger.js
+
 ```js
 export default () => {
     return async (requestDetails, req, res) => {
@@ -55,13 +61,14 @@ export default () => {
 ```
 
 #### app.js
+
 ```js
 import express from 'express';
 import tweenz from 'tweenz';
 import timeLogger from './time-logger';
 
 const app = express();
-app.use(tweenz(timeLogger));
+app.use(tweenz(timeLogger()));
 
 ...
 ```
@@ -69,12 +76,14 @@ app.use(tweenz(timeLogger));
 ## API
 
 ### Registering tweens
+
 ```
 tweenz(tween [, tween ...])
 ```
 
 ### Tween Callback
-A tween should return a callback, which will get executed with the following parameters
+
+A tween is a callback, which will get executed with the following arguments
 
 #### requestDetails
 
@@ -82,7 +91,7 @@ An object of the following type:
 
 ```js
 {
-    responseBody: string
+    responseBody: string;
 }
 ```
 

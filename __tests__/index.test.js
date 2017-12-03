@@ -20,7 +20,7 @@ describe('middleware', () => {
             };
         };
 
-        app.use(tweenz(dummyTween));
+        app.use(tweenz(dummyTween()));
     });
 
     it('should work with res.json', done => {

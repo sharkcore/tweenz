@@ -10,7 +10,6 @@ export type Tween = (
     $Request,
     $Response,
 ) => Promise<void>;
-export type TweenFactory = () => Tween;
 
 export const getPatchedSendFn = (
     context: Object,
@@ -27,11 +26,7 @@ export const getPatchedSendFn = (
     }.bind(res);
 };
 
-export default function tweenz(
-    ...tweenFactories: Array<TweenFactory>
-): Middleware {
-    const tweens = tweenFactories.map(t => t());
-
+export default function tweenz(...tweens: Array<Tween>): Middleware {
     return (req: $Request, res: $Response, next: NextFunction) => {
         // Save some stateful request context
         const context = {};
