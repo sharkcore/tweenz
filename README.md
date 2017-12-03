@@ -85,20 +85,20 @@ tweenz(tween [, tween ...])
 
 A tween is a callback, which will get executed with the following arguments
 
-#### requestDetails
+- **`requestDetails`**
 
-An object of the following type:
+    An object of the following type:
 
-```js
-{
-    responseBody: string;
-}
-```
+    ```js
+    {
+        responseBody: string;
+    }
+    ```
 
-#### req
+- **`req`**
 
-[Express request object](http://expressjs.com/en/api.html#req)
+    [Express request object](http://expressjs.com/en/api.html#req)
 
-#### res
+- **`res`**
 
-[Express response object](http://expressjs.com/en/api.html#res)
+    [Express response object](http://expressjs.com/en/api.html#res)
