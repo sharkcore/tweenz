@@ -21,7 +21,7 @@
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.16.0",
     "express": "^4.16.2",
-    "flow-bin": "^0.65.0",
+    "flow-bin": "^0.67.1",
     "flow-copy-source": "^1.2.1",
     "husky": "^0.14.3",
     "jest": "^22.0.0",
