@@ -4,10 +4,16 @@
   "main": "lib/index.js",
   "author": "Mark Larah <mark@larah.me>",
   "license": "MIT",
-  "keywords": ["express", "pyramid", "tween", "middleware", "nodejs", "node"],
+  "keywords": [
+    "express",
+    "pyramid",
+    "tween",
+    "middleware",
+    "nodejs",
+    "node"
+  ],
   "homepage": "https://github.com/sharkcore/tweenz",
   "scripts": {
-    "precommit": "yarn run lint",
     "prepublishOnly": "make build",
     "test": "jest --coverage",
     "lint": "eslint src",
@@ -30,5 +36,12 @@
   "peerDependencies": {
     "express": "^4.x.x"
   },
-  "files": ["lib"]
+  "files": [
+    "lib"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint"
+    }
+  }
 }
