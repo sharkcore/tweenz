@@ -1,9 +1,12 @@
 // @flow
-import type { $Request, $Response, Middleware, NextFunction } from 'express';
 
-export type RequestDetails = {
-    responseBody: string,
-};
+import type { $Request, $Response, Middleware, NextFunction } from 'express';
+import BufferList from 'bl';
+
+export type RequestDetails = {|
+    // TODO: Work out if this type can be inferred somehow
+    responseBody: any,
+|};
 
 export type Tween = (
     Promise<RequestDetails>,
@@ -11,36 +14,31 @@ export type Tween = (
     $Response,
 ) => Promise<void>;
 
-export const getPatchedSendFn = (
-    context: Object,
-    res: $Response,
-): $PropertyType<$Response, 'send'> => {
-    const oldSend = res.send.bind(res);
-
-    return function send(...args: any) {
-        // eslint-disable-next-line prefer-destructuring, no-param-reassign
-        context.responseBody = args[0];
-        oldSend(...args);
-        /* istanbul ignore next */
-        return this;
-    }.bind(res);
-};
-
 export default function tweenz(...tweens: Array<Tween>): Middleware {
     return (req: $Request, res: $Response, next: NextFunction) => {
-        // Save some stateful request context
-        const context = {};
+        // we'll store all chunks passed to res.write/end in memory here
+        const bufferList = new BufferList();
 
-        // Monkey patch express methods to intercept response body
-        // $FlowFixMe: https://github.com/facebook/flow/issues/3076
-        res.send = getPatchedSendFn(context, res);
+        // We're about to write over res.write and res.end - save the old versions
+        const oldResWrite = res.write.bind(res);
+        const oldResEnd = res.end.bind(res);
+
+        // $FlowFixMe: Ack that res.write is not writable - we're doing mad science
+        res.write = function PatchedWrite(chunk, ...args) {
+            bufferList.append(chunk);
+            return oldResWrite(chunk, ...args);
+        };
+
+        // $FlowFixMe: Ack that res.end is not writable - we're doing mad science
+        res.end = function PatchedEnd(chunk, ...args) {
+            bufferList.end(chunk);
+            return oldResEnd(chunk, ...args);
+        };
 
         // Construct a Promise to be fulfilled when request has finished
-        const requestDetails = new Promise(resolve => {
+        const requestDetails: Promise<RequestDetails> = new Promise(resolve => {
             function finish() {
-                resolve({
-                    responseBody: context.responseBody,
-                });
+                resolve({ responseBody: bufferList.toString() });
                 // eslint-disable-next-line no-use-before-define
                 removeListeners();
             }

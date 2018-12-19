@@ -11,8 +11,10 @@ A small library for writing [Express](https://expressjs.com/) middleware, inspir
 
 This library does the following:
 
-* Exposes the response body to the middleware (as part of `requestDetails`)
-* Provides a first class API to allow middleware to safely execute code after the request has finished
+-   Exposes the response body to the middleware (as part of `requestDetails`)
+-   Provides a first class API to allow middleware to safely execute code after the request has finished
+
+_**Please Note!** This middleware stores the whole response body in memory. If you are returning particularly large responses, you should be aware of this._
 
 ## Getting started
 
@@ -85,7 +87,7 @@ tweenz(tween [, tween ...])
 
 A tween is a callback, which will get executed with the following arguments
 
-- **`requestDetails`**
+-   **`requestDetails`**
 
     An object of the following type:
 
@@ -95,10 +97,10 @@ A tween is a callback, which will get executed with the following arguments
     }
     ```
 
-- **`req`**
+-   **`req`**
 
     [Express request object](http://expressjs.com/en/api.html#req)
 
-- **`res`**
+-   **`res`**
 
     [Express response object](http://expressjs.com/en/api.html#res)
