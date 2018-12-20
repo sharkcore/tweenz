@@ -37,7 +37,7 @@ describe('middleware', () => {
             });
     });
 
-    it('should work with res.end', done => {
+    it('should work with res.send', done => {
         app.get('/foo', (req, res) => {
             res.send('foo');
         });
@@ -47,6 +47,38 @@ describe('middleware', () => {
             .end(() => {
                 expect(beforeFn).toHaveBeenCalled();
                 expect(afterFn).toHaveBeenCalledWith('foo');
+                done();
+            });
+    });
+
+    it('should work with res.send (json)', done => {
+        app.get('/foo', (req, res) => {
+            res.send({ foo: 'bar' });
+        });
+        
+        request(app)
+            .get('/foo')
+            .end(() => {
+                expect(beforeFn).toHaveBeenCalled();
+                expect(JSON.parse(afterFn.mock.calls[0][0])).toMatchObject({ foo: 'bar' });
+                done();
+            });
+    });
+
+    it.skip('should work with res.end', done => {
+        app.get('/foo', (req, res) => {
+            res.set('Content-Type', 'text/plain');
+            res.write('foo');
+            res.write('bar');
+            res.write('baz');
+            res.end();
+        });
+
+        request(app)
+            .get('/foo')
+            .end(() => {
+                expect(beforeFn).toHaveBeenCalled();
+                expect(afterFn).toHaveBeenCalledWith('foobarbaz');
                 done();
             });
     });
