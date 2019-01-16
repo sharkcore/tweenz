@@ -43,5 +43,8 @@
     "hooks": {
       "pre-commit": "yarn run lint"
     }
+  },
+  "dependencies": {
+    "bl": "^2.1.2"
   }
 }

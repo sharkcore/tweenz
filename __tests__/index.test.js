@@ -65,20 +65,35 @@ describe('middleware', () => {
             });
     });
 
-    it.skip('should work with res.end', done => {
+    it('should work with just res.end', done => {
         app.get('/foo', (req, res) => {
             res.set('Content-Type', 'text/plain');
-            res.write('foo');
-            res.write('bar');
-            res.write('baz');
-            res.end();
+            res.end('foo');
         });
 
         request(app)
             .get('/foo')
             .end(() => {
                 expect(beforeFn).toHaveBeenCalled();
-                expect(afterFn).toHaveBeenCalledWith('foobarbaz');
+                expect(afterFn).toHaveBeenCalledWith('foo');
+                done();
+            });
+    });
+
+    it('should work with res.write + res.end', done => {
+        app.get('/foo', (req, res) => {
+            res.set('Content-Type', 'text/plain');
+            res.write('foo');
+            res.write('bar');
+            res.write('baz');
+            res.end('qux');
+        });
+
+        request(app)
+            .get('/foo')
+            .end(() => {
+                expect(beforeFn).toHaveBeenCalled();
+                expect(afterFn).toHaveBeenCalledWith('foobarbazqux');
                 done();
             });
     });
