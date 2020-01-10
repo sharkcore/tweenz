@@ -22,7 +22,7 @@
     "express": "^4.16.2",
     "flow-bin": "^0.89.0",
     "flow-copy-source": "^2.0.2",
-    "husky": "^1.2.1",
+    "husky": "^4.0.6",
     "jest": "^23.6.0",
     "supertest": "^3.0.0"
   },
