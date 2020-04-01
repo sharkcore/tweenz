@@ -14,7 +14,9 @@ export type Tween = (
     $Response,
 ) => Promise<void>;
 
-export default function tweenz(...tweens: Array<Tween>): Middleware {
+export default function tweenz(
+    ...tweens: Array<Tween>
+): Middleware<$Request, $Response> {
     return (req: $Request, res: $Response, next: NextFunction) => {
         // we'll store all chunks passed to res.write/end in memory here
         const bufferList = new BufferList();
